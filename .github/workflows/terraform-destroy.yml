@@ -32,12 +32,12 @@ jobs:
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
-      run: terraform init -chdir=bootstrap/infrastructure
+      run: terraform -chdir=bootstrap/infrastructure init 
       env:
         TF_VAR_SLEIPNIR: ${{ secrets.SLEIPNIR_PK }}
 
     - name: Terraform Pull
-      run: terraform state pull -chdir=bootstrap/infrastructure
+      run: terraform state pull
       env:
         TF_VAR_SLEIPNIR: ${{ secrets.SLEIPNIR_PK }}
 
