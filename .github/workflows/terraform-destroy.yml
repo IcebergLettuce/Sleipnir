@@ -41,6 +41,11 @@ jobs:
       env:
         TF_VAR_SLEIPNIR: ${{ secrets.SLEIPNIR_PK }}
 
+    - name: Terraform State
+      run: terraform state show
+      env:
+        TF_VAR_SLEIPNIR: ${{ secrets.SLEIPNIR_PK }}
+
     # Generates an execution plan for Terraform
     - name: Terraform Destroy
       run: terraform apply -destroy -auto-approve -lock=false 
