@@ -88,7 +88,7 @@ resource "aws_instance" "sleipnir" {
 
   provisioner "remote-exec" {
     inline = [
-      "mkdir bootstrap_scripts",
+      "mkdir initialisation_scripts",
     ]
 
     connection {
@@ -100,8 +100,8 @@ resource "aws_instance" "sleipnir" {
   }
 
   provisioner "file" {
-    source      = "bootstrap_scripts"
-    destination = "bootstrap_scripts"
+    source      = "initialisation_scripts/*"
+    destination = "initialisation_scripts"
 
     connection {
       type        = "ssh"

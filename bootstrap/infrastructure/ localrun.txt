@@ -1,2 +1,0 @@
-export TF_VAR_SLEIPNIRPK=$(cat {secretlocation}/sleipnir.pem)
-
