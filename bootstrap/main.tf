@@ -7,11 +7,11 @@ terraform {
  }
 
  backend "s3" {
-   bucket         = "stem-infrastructure-state"
+   bucket         = "sleipnir-infrastructure-state"
    key            = "state/terraform.tfstate"
    region         = "eu-central-1"
    encrypt        = true
-   dynamodb_table = "stem-infrastructure-state"
+   dynamodb_table = "sleipnir-infrastructure-state"
  }
 }
 
@@ -19,8 +19,8 @@ provider "aws" {
  region = "eu-central-1"
 }
 
-resource "aws_s3_bucket" "stem-infrastructure-state" {
- bucket = "stem-infrastructure-state"
+resource "aws_s3_bucket" "sleipnir-infrastructure-state" {
+ bucket = "sleipnir-infrastructure-state"
  acl    = "private"
 
  versioning {
@@ -29,7 +29,7 @@ resource "aws_s3_bucket" "stem-infrastructure-state" {
 }
 
 resource "aws_s3_bucket_public_access_block" "block" {
- bucket = aws_s3_bucket.stem-infrastructure-state.id
+ bucket = aws_s3_bucket.sleipnir-infrastructure-state.id
 
  block_public_acls       = true
  block_public_policy     = true
@@ -37,8 +37,8 @@ resource "aws_s3_bucket_public_access_block" "block" {
  restrict_public_buckets = true
 }
 
-resource "aws_dynamodb_table" "stem-infrastructure-state" {
- name           = "stem-infrastructure-state"
+resource "aws_dynamodb_table" "sleipnir-infrastructure-state" {
+ name           = "sleipnir-infrastructure-state"
  read_capacity  = 20
  write_capacity = 20
  hash_key       = "LockID"

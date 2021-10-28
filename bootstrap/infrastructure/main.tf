@@ -10,15 +10,15 @@ terraform {
  }
 
  backend "s3" {
-   bucket         = "stem-infrastructure-state"
+   bucket         = "sleipnir-infrastructure-state"
    key            = "state/terraform.tfstate"
    region         = "eu-central-1"
    encrypt        = true
-   dynamodb_table = "stem-infrastructure-state"
+   dynamodb_table = "sleipnir-infrastructure-state"
  }
 }
 
-variable "STEM" {
+variable "SLEIPNIR_PK" {
   type = string
 }
 
@@ -27,8 +27,8 @@ provider "aws" {
   region  = "eu-central-1"
 }
 
-resource "aws_security_group" "STEM" {
-  name        = "stem-security-group"
+resource "aws_security_group" "sleipnir" {
+  name        = "sleipnir-security-group"
   description = "Allow HTTP, HTTPS and SSH traffic"
 
   ingress {
@@ -63,26 +63,26 @@ resource "aws_security_group" "STEM" {
   }
 
   tags = {
-    Name = "STEM"
+    Name = "sleipnir"
   }
 }
 
 resource "aws_eip_association" "eip_assoc" {
-  instance_id   = "${aws_instance.STEM.id}"
+  instance_id   = "${aws_instance.sleipnir.id}"
   allocation_id = "eipalloc-78a96a79"
 }
 
-resource "aws_instance" "STEM" {
-  key_name      = "STEM"
+resource "aws_instance" "sleipnir" {
+  key_name      = "sleipnir"
   ami           = "ami-05f7491af5eef733a"
   instance_type = "t2.medium"
 
   tags = {
-    Name = "STEM"
+    Name = "sleipnir"
   }
 
   vpc_security_group_ids = [
-    aws_security_group.STEM.id
+    aws_security_group.sleipnir.id
   ]
 
 
@@ -94,7 +94,7 @@ resource "aws_instance" "STEM" {
     connection {
       type        = "ssh"
       user        = "ubuntu"
-      private_key = var.STEM
+      private_key = var.SLEIPNIR
       host        = self.public_dns
     }
   }
@@ -106,7 +106,7 @@ resource "aws_instance" "STEM" {
     connection {
       type        = "ssh"
       user        = "ubuntu"
-      private_key = var.STEM
+      private_key = var.SLEIPNIRPK_PK
       host        = self.public_dns
     }
   }
