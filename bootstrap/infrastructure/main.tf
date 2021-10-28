@@ -18,7 +18,7 @@ terraform {
  }
 }
 
-variable "SLEIPNIR_PK" {
+variable "SLEIPNIR" {
   type = string
 }
 
@@ -106,7 +106,7 @@ resource "aws_instance" "sleipnir" {
     connection {
       type        = "ssh"
       user        = "ubuntu"
-      private_key = var.SLEIPNIRPK_PK
+      private_key = var.SLEIPNIR
       host        = self.public_dns
     }
   }
