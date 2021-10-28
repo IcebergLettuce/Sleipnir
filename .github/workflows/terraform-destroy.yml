@@ -36,6 +36,11 @@ jobs:
       env:
         TF_VAR_SLEIPNIR: ${{ secrets.SLEIPNIR_PK }}
 
+    - name: Terraform Plan
+      run: terraform -chdir=bootstrap/infrastructure plan -lock=false
+      env:
+        TF_VAR_SLEIPNIR: ${{ secrets.SLEIPNIR_PK }}
+
     # Generates an execution plan for Terraform
     - name: Terraform Destroy
       run: terraform destroy -auto-approve -lock=false 
