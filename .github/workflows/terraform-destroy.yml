@@ -36,8 +36,8 @@ jobs:
       env:
         TF_VAR_SLEIPNIR: ${{ secrets.SLEIPNIR_PK }}
 
-    - name: Terraform Plan
-      run: terraform plan -lock=false -chdir=bootstrap/infrastructure
+    - name: Terraform Pull
+      run: terraform state pull -chdir=bootstrap/infrastructure
       env:
         TF_VAR_SLEIPNIR: ${{ secrets.SLEIPNIR_PK }}
 
