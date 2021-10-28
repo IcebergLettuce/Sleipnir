@@ -71,4 +71,4 @@ jobs:
       run: terraform init -chdir=bootstrap/infrastructure
 
     - name: Terraform Destroy
-      run: terraform destroy -auto-approve -lock=false -chdir=bootstrap/infrastructure
+      run: terraform destroy -auto-approve -lock=false 
