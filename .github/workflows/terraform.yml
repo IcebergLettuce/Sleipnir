@@ -47,3 +47,28 @@ jobs:
       run: terraform -chdir=bootstrap/infrastructure apply -auto-approve
       env:
         TF_VAR_SLEIPNIR: ${{ secrets.SLEIPNIR_PK }}
+  
+  run-if-failed:
+    runs-on: ubuntu-latest
+    needs: [terraform]
+    if: always() && (needs.terraform.result == 'failure')
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v2
+    
+    - name: "Configure AWS Credentials"
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-region: eu-west-1
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+
+    - name: Terraform Init
+      run: terraform -chdir=bootstrap/infrastructure init
+
+    - name: Terraform Destroy
+      run: terraform -chdir=bootstrap/infrastructure destroy
