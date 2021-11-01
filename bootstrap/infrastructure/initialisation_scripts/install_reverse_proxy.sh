@@ -6,6 +6,11 @@ sudo apt install nginx -y
 sudo apt-get install certbot -y
 sudo apt-get install python3-certbot-nginx -y
 
+
+HTTP_PORT=$(kubectl get -o jsonpath="{.spec.ports[0].nodePort}" services traefik)
+HTTPS_PORT=$(kubectl get -o jsonpath="{.spec.ports[1].nodePort}" services traefik)
+
+
 sudo systemctl start nginx
 
 

@@ -104,9 +104,6 @@ helm repo add traefik https://helm.traefik.io/traefik
 helm repo update
 helm install traefik traefik/traefik
 
-HTTP_PORT=$(kubectl get -o jsonpath="{.spec.ports[0].nodePort}" services traefik)
-HTTPS_PORT=$(kubectl get -o jsonpath="{.spec.ports[1].nodePort}" services traefik)
-
 # ADD DASHBOARD
 kubectl apply -f ~/initialisation_scripts/deployments/dashboard.yaml
 
