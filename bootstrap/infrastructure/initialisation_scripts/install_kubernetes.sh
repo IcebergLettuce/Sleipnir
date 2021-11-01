@@ -108,7 +108,7 @@ HTTP_PORT=$(kubectl get -o jsonpath="{.spec.ports[0].nodePort}" services traefik
 HTTPS_PORT=$(kubectl get -o jsonpath="{.spec.ports[1].nodePort}" services traefik)
 
 # ADD DASHBOARD
-kubectl apply -f /initialisation_scripts/deployments/dashboard.yaml
+kubectl apply -f ~/initialisation_scripts/deployments/dashboard.yaml
 
 
 
