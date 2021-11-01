@@ -100,7 +100,7 @@ resource "aws_instance" "sleipnir" {
   }
 
   provisioner "file" {
-    source      = "initialisation_scripts"
+    source      = "initialisation_scripts/"
     destination = "initialisation_scripts"
 
     connection {
