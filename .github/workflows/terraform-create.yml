@@ -47,3 +47,16 @@ jobs:
       run: terraform -chdir=bootstrap/infrastructure apply -auto-approve -lock=false
       env:
         TF_VAR_SLEIPNIR: ${{ secrets.SLEIPNIR_PK }}
+    
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: pipr.io
+        username: ubuntu
+        key: ${{ secrets.SLEIPNIR_PK }}
+        script: |
+          sudo chmod +x initialisation_scripts/install_kubernetes.sh
+          sudo ./initialisation_scripts/install_kubernetes.sh
+          sudo chmod +x initialisation_scripts/install_reverse_proxy.sh
+          sudo ./initialisation_scripts/install_reverse_proxy.sh
+          

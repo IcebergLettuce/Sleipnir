@@ -29,3 +29,6 @@ EOF
 
 sudo mv stem.conf /etc/nginx/nginx.conf
 sudo systemctl reload nginx
+
+sudo certbot --nginx -d pipr.io -d www.pipr.io --non-interactive --agree-tos -m manuel.alexander.hirzel@gmail.com
+sudo systemctl reload nginx
