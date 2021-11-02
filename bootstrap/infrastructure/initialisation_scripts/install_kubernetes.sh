@@ -105,7 +105,7 @@ helm repo update
 helm install traefik traefik/traefik
 
 # ADD DASHBOARD
-kubectl apply -f ~/initialisation_scripts/deployments/dashboard.yaml
+kubectl apply -f initialisation_scripts/deployments/dashboard.yaml
 
 
 
