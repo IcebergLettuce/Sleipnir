@@ -19,8 +19,6 @@ spec:
       services:
         - name: kubernetes-dashboard
           port: 9090
-      middlewares:
-        - name: dashboard-stripprefix
 
 --- 
 

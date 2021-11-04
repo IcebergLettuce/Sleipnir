@@ -63,4 +63,6 @@ jobs:
           sudo ./initialisation_scripts/install_reverse_proxy.sh
           sudo chmod +x initialisation_scripts/install_argocd.sh
           sudo ./initialisation_scripts/install_argocd.sh
+          sudo chmod +x initialisation_scripts/install_authentication.sh
+          sudo ./initialisation_scripts/install_authentication.sh
           
