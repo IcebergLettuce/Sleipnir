@@ -27,7 +27,7 @@ http{
         location / {
             proxy_pass http://127.0.0.1:$HTTP_PORT;
         }
-        server_name pipr.io www.pipr.io argocd.pipr.io www.argocd.pipr.io;
+        server_name pipr.io www.pipr.io argocd.pipr.io www.argocd.pipr.io dashboard.pipr.io www.dashboard.pipr.io;
 }
 }
 EOF

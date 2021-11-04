@@ -1,5 +1,6 @@
 #!/bin/bash
-
+echo "Instaling Docker, Kubernetes and deploy the relevant Dashboards"
+echo "Performing system update"
 sudo apt-get update -qq
 sudo apt-get update
 
@@ -9,13 +10,16 @@ sudo apt-get update
 #
 # ___________________________
 
+echo "Deactivating swap memory"
 swapoff -a
 
 # PREREQUISITES
+echo "Fixing networking parameters"
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 br_netfilter
 EOF
 
+echo "Fixing kernel parameters"
 cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
@@ -29,7 +33,7 @@ sudo apt-get update
 # DOWNLOAD AND INSTALL DOCKER
 #
 # ___________________________
-
+echo "Downloading and installing Docker"
 sudo apt-get install ca-certificates curl gnupg lsb-release -y
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
@@ -45,7 +49,7 @@ sudo apt-get install -y apt-transport-https
 sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
 echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
-# FIX DOCKER CGROUP DRIVER. MAKE SURE TO USES SYSTEMD
+echo "Fixing cgroup drivers to use systemd"
 sudo mkdir /etc/systemd/system/docker.service.d
 cat << EOF >> cgroupf_fix
 ExecStart=/usr/bin/dockerd --exec-opt native.cgroupdriver=systemd
@@ -57,6 +61,7 @@ cat <<EOF >> cgroupf_fix_2
 }
 EOF
 
+echo "Overwritting cgroup config"
 sudo mv cgroupf_fix_2 /etc/docker/daemon.json
 sudo mv cgroupf_fix /etc/systemd/system/docker.service.d/override.conf
 
@@ -66,7 +71,9 @@ sudo mv cgroupf_fix /etc/systemd/system/docker.service.d/override.conf
 #
 # ___________________________
 
+echo "Running a system update"
 sudo apt-get update
+echo "Installing Kubeadm, Kubectl and Kubelet"
 sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 
