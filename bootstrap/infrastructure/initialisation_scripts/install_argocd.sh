@@ -5,4 +5,4 @@ wget https://github.com/argoproj/argo-cd/releases/download/v2.1.6/argocd-linux-a
 sudo chmod +x argocd
 
 sudo apt install apache2-utils -y
-sudo kubectl patch secret -n argocd argocd-secret -p '{"stringData": { "admin.password": "'$(htpasswd -bnBC 10 "" $ARGO_PW | tr -d ':\n')'"}}'
+sudo kubectl patch secret -n argocd argocd-secret -p '{"stringData": { "admin.password": "'$(htpasswd -bnBC 10 "" $ARGOPW | tr -d ':\n')'"}}'
