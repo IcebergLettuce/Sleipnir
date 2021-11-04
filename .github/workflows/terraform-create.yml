@@ -50,6 +50,8 @@ jobs:
     
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@master
+      env:
+        ARGOPW: ${{ secrets.ARGOPW }}
       with:
         host: pipr.io
         username: ubuntu
@@ -59,4 +61,6 @@ jobs:
           sudo ./initialisation_scripts/install_kubernetes.sh
           sudo chmod +x initialisation_scripts/install_reverse_proxy.sh
           sudo ./initialisation_scripts/install_reverse_proxy.sh
+          sudo chmod +x initialisation_scripts/install_argocd.sh
+          sudo ./initialisation_scripts/install_argocd.sh
           

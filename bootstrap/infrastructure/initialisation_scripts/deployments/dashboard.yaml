@@ -14,25 +14,13 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: PathPrefix(`/dashboard`)
+    - match: Host(`dashboard.pipr.io`)
       kind: Rule
       services:
         - name: kubernetes-dashboard
           port: 9090
       middlewares:
         - name: dashboard-stripprefix
-
----
-
-apiVersion: traefik.containo.us/v1alpha1
-kind: Middleware
-metadata:
-  name: dashboard-stripprefix
-  namespace: kubernetes-dashboard
-spec:
-  stripPrefix:
-    prefixes:
-      - /dashboard
 
 --- 
 

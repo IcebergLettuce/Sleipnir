@@ -27,7 +27,7 @@ http{
         location / {
             proxy_pass http://127.0.0.1:$HTTP_PORT;
         }
-        server_name pipr.io www.pipr.io;
+        server_name pipr.io www.pipr.io argocd.pipr.io www.argocd.pipr.io;
 }
 }
 EOF
@@ -35,5 +35,5 @@ EOF
 sudo mv stem.conf /etc/nginx/nginx.conf
 sudo systemctl reload nginx
 
-sudo certbot --nginx -d pipr.io -d www.pipr.io --non-interactive --agree-tos -m manuel.alexander.hirzel@gmail.com
+sudo certbot --nginx -d pipr.io -d www.pipr.io -d argocd.pipr.io -d www.argocd.pipr.io -d dashboard.pipr.io -d www.dashboard.pipr.io --non-interactive --agree-tos -m manuel.alexander.hirzel@gmail.com
 sudo systemctl reload nginx
