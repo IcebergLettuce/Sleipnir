@@ -25,7 +25,7 @@ http{
         error_log /var/log/nginx/reverse-error.log;
 
         location / {
-            proxy_set_header HOST $http_host;
+            proxy_set_header HOST \$http_host;
             proxy_pass http://127.0.0.1:$HTTP_PORT;
         }
         server_name pipr.io www.pipr.io argocd.pipr.io www.argocd.pipr.io dashboard.pipr.io www.dashboard.pipr.io;
