@@ -1,4 +1,4 @@
-name: 'Insecure Kubernetes Cluster'
+name: 'Secure Kubernetes Cluster'
 
 on:
   workflow_dispatch:

@@ -66,28 +66,3 @@ resource "aws_security_group" "sleipnir" {
     Name = "sleipnir"
   }
 }
-
-# resource "aws_eip_association" "eip_assoc" {
-#   instance_id   = "${aws_instance.sleipnir.id}"
-#   allocation_id = "eipalloc-78a96a79"
-# }
-
-# resource "aws_instance" "sleipnir" {
-#   key_name      = "sleipnir"
-#   ami           = "ami-05f7491af5eef733a"
-#   instance_type = "t2.medium"
-
-#   tags = {
-#     Name = "sleipnir"
-#   }
-
-#   vpc_security_group_ids = [
-#     aws_security_group.sleipnir.id
-#   ]
-
-#   ebs_block_device {
-#     device_name = "/dev/sda1"
-#     volume_type = "gp2"
-#     volume_size = 30
-#   }
-# }
