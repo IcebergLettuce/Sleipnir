@@ -112,7 +112,7 @@ helm repo update
 helm install traefik traefik/traefik
 
 # ADD DASHBOARD
-kubectl apply -f basic-deployment.yaml
+kubectl apply -f kubernetes/basic-deployment.yaml
 
 
 
