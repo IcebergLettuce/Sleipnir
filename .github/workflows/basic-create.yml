@@ -46,6 +46,7 @@ jobs:
     name: 'Install Componenets'
     runs-on: ubuntu-latest
     environment: production
+    needs: terraform
 
     defaults:
       run:
