@@ -76,10 +76,10 @@ jobs:
           sudo ./kubernetes/install.sh
 
   nginx:
-    name: 'Install Nginx'
+    name: 'Install Nginx Reverse Proxy'
     runs-on: ubuntu-latest
     environment: production
-    needs: terraform
+    needs: kubernetes
 
     defaults:
       run:
