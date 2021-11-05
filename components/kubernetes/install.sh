@@ -72,7 +72,7 @@ sudo mv cgroupf_fix /etc/systemd/system/docker.service.d/override.conf
 # ___________________________
 
 echo "Running a system update"
-sudo apt-get update
+sudo apt-get update -y
 echo "Installing Kubeadm, Kubectl and Kubelet"
 sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
@@ -112,7 +112,7 @@ helm repo update
 helm install traefik traefik/traefik
 
 # ADD DASHBOARD
-sudo kubectl apply -f basic-deployment.yaml
+kubectl apply -f basic-deployment.yaml
 
 
 
