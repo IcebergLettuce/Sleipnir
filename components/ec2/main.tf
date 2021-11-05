@@ -75,7 +75,7 @@ resource "aws_eip_association" "eip_assoc" {
 resource "aws_instance" "sleipnir" {
   key_name      = "sleipnir"
   ami           = "ami-05f7491af5eef733a"
-  instance_type = "t2.medium"
+  instance_type = "t2.nano"
 
   tags = {
     Name = "sleipnir"
