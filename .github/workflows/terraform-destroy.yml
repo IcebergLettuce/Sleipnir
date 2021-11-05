@@ -1,4 +1,4 @@
-name: '[NOT WORKING] Destroy Sleipnir Infrastructure'
+name: '[NOT WORKING] Destroy Kubernetes Cluster'
 
 on:
   workflow_dispatch:

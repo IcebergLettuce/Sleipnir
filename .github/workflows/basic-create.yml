@@ -1,4 +1,4 @@
-name: 'Create Playground Kubernetes Cluster'
+name: 'Accessible Kubernetes Cluster'
 
 on:
   workflow_dispatch:
@@ -108,6 +108,40 @@ jobs:
         script: |
           sudo chmod +x nginx/install.sh
           sudo ./nginx/install.sh
+
+  oauth2:
+    name: 'Install OAuth2 Proxy'
+    runs-on: ubuntu-latest
+    environment: production
+    needs: kubernetes
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Upload OAuth2 Component
+      uses: appleboy/scp-action@master
+      with:
+        host: pipr.io
+        username: ubuntu
+        key: ${{ secrets.SLEIPNIR_PK }}
+        source: "components/oauth2/install.sh,components/oauth2/oauth2-proxy.cfg.sh,components/oauth2/nginx-auth.conf"
+        target: "oauth2"
+        strip_components: 2
+
+    - name: Install OAuth2
+      uses: appleboy/ssh-action@master
+      with:
+        host: pipr.io
+        username: ubuntu
+        key: ${{ secrets.SLEIPNIR_PK }}
+        script: |
+          sudo chmod +x oauth2/install.sh
+          sudo ./oauth2/install.sh
 
   dashboard:
     name: 'Deploy Kubernetes Dashboard'
