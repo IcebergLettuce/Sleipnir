@@ -111,10 +111,8 @@ helm repo add traefik https://helm.traefik.io/traefik
 helm repo update
 helm install traefik traefik/traefik
 
-
-
 # ADD DASHBOARD
-kubectl apply -f basic-deployment.yaml
+sudo kubectl apply -f basic-deployment.yaml
 
 
 
