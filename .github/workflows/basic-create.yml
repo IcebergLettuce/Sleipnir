@@ -1,4 +1,4 @@
-name: 'Accessible Kubernetes Cluster'
+name: 'Insecure Kubernetes Cluster'
 
 on:
   workflow_dispatch:
