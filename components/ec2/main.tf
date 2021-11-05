@@ -85,32 +85,6 @@ resource "aws_instance" "sleipnir" {
     aws_security_group.sleipnir.id
   ]
 
-
-  provisioner "remote-exec" {
-    inline = [
-      "mkdir initialisation_scripts",
-    ]
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = var.SLEIPNIR
-      host        = self.public_dns
-    }
-  }
-
-  provisioner "file" {
-    source      = "initialisation_scripts/"
-    destination = "initialisation_scripts"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = var.SLEIPNIR
-      host        = self.public_dns
-    }
-  }
-
   ebs_block_device {
     device_name = "/dev/sda1"
     volume_type = "gp2"
