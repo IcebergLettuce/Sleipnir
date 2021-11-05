@@ -108,4 +108,72 @@ jobs:
         script: |
           sudo chmod +x nginx/install.sh
           sudo ./nginx/install.sh
-    
+
+  dashboard:
+    name: 'Deploy Kubernetes Dashboard'
+    runs-on: ubuntu-latest
+    environment: production
+    needs: kubernetes
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Upload Dashboard Component
+      uses: appleboy/scp-action@master
+      with:
+        host: pipr.io
+        username: ubuntu
+        key: ${{ secrets.SLEIPNIR_PK }}
+        source: "components/dashboard/install.sh,components/dashboard/deployment.yaml"
+        target: "dashboard"
+        strip_components: 2
+
+    - name: Install Dashboard
+      uses: appleboy/ssh-action@master
+      with:
+        host: pipr.io
+        username: ubuntu
+        key: ${{ secrets.SLEIPNIR_PK }}
+        script: |
+          sudo chmod +x dashboard/install.sh
+          sudo ./dashboard/install.sh
+
+  argocd:
+    name: 'Deploy Argocd'
+    runs-on: ubuntu-latest
+    environment: production
+    needs: kubernetes
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Upload Argocd Component
+      uses: appleboy/scp-action@master
+      with:
+        host: pipr.io
+        username: ubuntu
+        key: ${{ secrets.SLEIPNIR_PK }}
+        source: "components/argocd/install.sh,components/argocd/argocd-patch.yaml,components/argocd/argocd-ingress.yaml"
+        target: "argocd"
+        strip_components: 2
+
+    - name: Install Argod
+      uses: appleboy/ssh-action@master
+      with:
+        host: pipr.io
+        username: ubuntu
+        key: ${{ secrets.SLEIPNIR_PK }}
+        script: |
+          sudo chmod +x argocd/install.sh
+          sudo ./argocd/install.sh
+      
