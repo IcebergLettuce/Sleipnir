@@ -1,4 +1,4 @@
-name: 'Provision Sleipnir Infrastructure'
+name: 'Basic Kubernetes Cluster'
 
 on:
   workflow_dispatch:

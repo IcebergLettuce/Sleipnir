@@ -6,13 +6,10 @@ sudo apt install nginx -y
 sudo apt-get install certbot -y
 sudo apt-get install python3-certbot-nginx -y
 
-
 HTTP_PORT=$(sudo kubectl get -o jsonpath="{.spec.ports[0].nodePort}" services traefik)
 HTTPS_PORT=$(sudo kubectl get -o jsonpath="{.spec.ports[1].nodePort}" services traefik)
 
-
 sudo systemctl start nginx
-
 
 cat <<EOF >> stem.conf
 events {}
