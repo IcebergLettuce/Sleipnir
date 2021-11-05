@@ -1,4 +1,4 @@
-name: '[NOT WORKING] Destroy Kubernetes Cluster'
+name: 'Destroy Kubernetes Cluster'
 
 on:
   workflow_dispatch:
@@ -32,22 +32,18 @@ jobs:
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
-      run: terraform -chdir=bootstrap/infrastructure init 
+      run: terraform -chdir=components/empty init 
       env:
         TF_VAR_SLEIPNIR: ${{ secrets.SLEIPNIR_PK }}
 
-    - name: Terraform Pull
-      run: terraform state pull
+    - name: Terraform Plan
+      run: terraform -chdir=components/empty plan
       env:
         TF_VAR_SLEIPNIR: ${{ secrets.SLEIPNIR_PK }}
 
-    - name: Terraform State
-      run: terraform state show
+    - name: Terraform Apply
+      run: terraform -chdir=components/empty apply -auto-approve -lock=false 
       env:
         TF_VAR_SLEIPNIR: ${{ secrets.SLEIPNIR_PK }}
-
-    # Generates an execution plan for Terraform
-    - name: Terraform Destroy
-      run: terraform apply -destroy -auto-approve -lock=false 
 
    
