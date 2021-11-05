@@ -67,10 +67,10 @@ resource "aws_security_group" "sleipnir" {
   }
 }
 
-resource "aws_eip_association" "eip_assoc" {
-  instance_id   = "${aws_instance.sleipnir.id}"
-  allocation_id = "eipalloc-78a96a79"
-}
+# resource "aws_eip_association" "eip_assoc" {
+#   instance_id   = "${aws_instance.sleipnir.id}"
+#   allocation_id = "eipalloc-78a96a79"
+# }
 
 # resource "aws_instance" "sleipnir" {
 #   key_name      = "sleipnir"
