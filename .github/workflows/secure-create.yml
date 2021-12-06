@@ -129,7 +129,7 @@ jobs:
         host: pipr.io
         username: ubuntu
         key: ${{ secrets.SLEIPNIR_PK }}
-        source: "components/oauth2/install.sh,components/oauth2/oauth2-proxy.cfg.sh,components/oauth2/nginx-auth.conf"
+        source: "components/oauth2/install.sh,components/oauth2/oauth2-proxy.cfg,components/oauth2/nginx-auth.conf"
         target: "oauth2"
         strip_components: 2
 
