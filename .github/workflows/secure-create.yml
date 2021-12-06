@@ -113,7 +113,7 @@ jobs:
     name: 'Install OAuth2 Proxy'
     runs-on: ubuntu-latest
     environment: production
-    needs: kubernetes
+    needs: nginx
 
     defaults:
       run:
