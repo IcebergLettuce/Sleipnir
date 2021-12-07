@@ -7,7 +7,9 @@ Steps to bootstrap STEM
 - Create a Key in AWS KMS  
 
 
-
+Resources: \
+https://www.youtube.com/watch?v=rYodcvhh7b8
+https://github.com/meysamhadeli/awesome-dotnet-tips
 ______________________________
 ### Part 1: 
 #### Automated provisionining of infrastructure and installation of Kubernetes
