@@ -11,6 +11,7 @@ Resources: \
 https://www.youtube.com/watch?v=rYodcvhh7b8 \\
 https://github.com/meysamhadeli/awesome-dotnet-tips \\
 https://www.practicalnetworking.net/series/packet-traveling/packet-traveling/ \\
+https://traefik.io/resources/traefik-kubernetes-tutorial/
 ______________________________
 ### Part 1: 
 #### Automated provisionining of infrastructure and installation of Kubernetes
