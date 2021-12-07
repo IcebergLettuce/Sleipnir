@@ -10,7 +10,7 @@ Steps to bootstrap STEM
 Resources: \
 https://www.youtube.com/watch?v=rYodcvhh7b8
 https://github.com/meysamhadeli/awesome-dotnet-tips
-______________________________
+https://www.practicalnetworking.net/series/packet-traveling/packet-traveling/______________________________
 ### Part 1: 
 #### Automated provisionining of infrastructure and installation of Kubernetes
 
@@ -18,6 +18,7 @@ Used Technologies:
 - Terraform & Bash
 
 Alternative Technologies:
+
 - Pulumi
 
 Open Questions:
