@@ -8,9 +8,10 @@ Steps to bootstrap STEM
 
 
 Resources: \
-https://www.youtube.com/watch?v=rYodcvhh7b8
-https://github.com/meysamhadeli/awesome-dotnet-tips
-https://www.practicalnetworking.net/series/packet-traveling/packet-traveling/______________________________
+https://www.youtube.com/watch?v=rYodcvhh7b8 \\
+https://github.com/meysamhadeli/awesome-dotnet-tips \\
+https://www.practicalnetworking.net/series/packet-traveling/packet-traveling/ \\
+______________________________
 ### Part 1: 
 #### Automated provisionining of infrastructure and installation of Kubernetes
 
