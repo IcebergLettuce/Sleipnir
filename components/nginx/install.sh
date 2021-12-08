@@ -12,6 +12,7 @@ HTTPS_PORT=$(sudo kubectl get -o jsonpath="{.spec.ports[1].nodePort}" services t
 sudo systemctl start nginx
 
 cat <<EOF >> stem.conf
+load_module /usr/lib/nginx/modules/ngx_stream_module.so;
 events {}
 http{
     server {
@@ -39,7 +40,6 @@ stream {
    upstream / {
         server 127.0.0.1:31933;
    }
-
 }
 EOF
 

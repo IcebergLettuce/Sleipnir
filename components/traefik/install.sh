@@ -1,9 +1,8 @@
+
+sudo apt-get install jq -y
 sudo kubectl apply -f traefik/deployment.yaml
 
-sudo kubectl patch deployment \
-  traefik \
-  --namespace default \
-  --type='json' \
-  -p='[{"op": "add", "path": "/spec/template/spec/containers/0/args", "value": [
-  "--api.insecure=true",
-]}]'
+arguments=$(sudo kubectl get deployments traefik -o jsonpath='{.spec.template.spec.containers[0].args}')
+
+
+sudo kubectl patch deployment traefik --type='json' -p='[{"op": "add", "path": "/spec/template/spec/containers/0/args", "value": [$(cat args)]}]'
