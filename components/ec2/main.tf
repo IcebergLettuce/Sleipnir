@@ -29,7 +29,15 @@ provider "aws" {
 
 resource "aws_security_group" "sleipnir" {
   name        = "sleipnir-security-group"
-  description = "Allow HTTP, HTTPS and SSH traffic"
+  description = "Allow HTTP, HTTPS, AMQP and SSH traffic"
+
+  ingress {
+    description = "AMQP"
+    from_port   = 5672
+    to_port     = 5672
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   ingress {
     description = "SSH"

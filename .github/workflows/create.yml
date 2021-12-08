@@ -133,16 +133,74 @@ jobs:
         target: "dashboard"
         strip_components: 2
 
-    - name: Install Dashboard
+  traefik:
+    name: 'Deploy Traefik Dashboard'
+    runs-on: ubuntu-latest
+    environment: production
+    needs: kubernetes
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Upload Traefik Component
+      uses: appleboy/scp-action@master
+      with:
+        host: pipr.io
+        username: ubuntu
+        key: ${{ secrets.SLEIPNIR_PK }}
+        source: "components/traefik/install.sh,components/traefik/deployment.yaml"
+        target: "traefik"
+        strip_components: 2
+
+    - name: Install Traefik Dashboard
       uses: appleboy/ssh-action@master
       with:
         host: pipr.io
         username: ubuntu
         key: ${{ secrets.SLEIPNIR_PK }}
         script: |
-          sudo chmod +x dashboard/install.sh
-          sudo ./dashboard/install.sh
+          sudo chmod +x traefik/install.sh
+          sudo ./traefik/install.sh
+          
+  rabbit:
+    name: 'Deploy Rabbit MQ'
+    runs-on: ubuntu-latest
+    environment: production
+    needs: kubernetes
 
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Upload Rabbit Component
+      uses: appleboy/scp-action@master
+      with:
+        host: pipr.io
+        username: ubuntu
+        key: ${{ secrets.SLEIPNIR_PK }}
+        source: "components/rabbit/install.sh,components/rabbit/deployment.yaml"
+        target: "rabbit"
+        strip_components: 2
+
+    - name: Install Rabbit
+      uses: appleboy/ssh-action@master
+      with:
+        host: pipr.io
+        username: ubuntu
+        key: ${{ secrets.SLEIPNIR_PK }}
+        script: |
+          sudo chmod +x rabbit/install.sh
+          sudo ./rabbit/install.sh
+      
   argocd:
     name: 'Deploy Argocd'
     runs-on: ubuntu-latest

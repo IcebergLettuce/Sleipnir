@@ -28,6 +28,19 @@ http{
         server_name pipr.io www.pipr.io argocd.pipr.io www.argocd.pipr.io dashboard.pipr.io www.dashboard.pipr.io;
 }
 }
+stream {
+   server {
+
+        listen 5672;
+        proxy_pass 127.0.0.1:31933;
+
+   }
+
+   upstream / {
+        server 127.0.0.1:31933;
+   }
+
+}
 EOF
 
 sudo mv stem.conf /etc/nginx/nginx.conf
