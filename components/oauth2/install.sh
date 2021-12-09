@@ -9,5 +9,6 @@ HTTP_PORT=$(sudo kubectl get -o jsonpath="{.spec.ports[0].nodePort}" services tr
 sed -i "s/@HTTPPORT@/$HTTP_PORT/" oauth2/nginx-auth.conf
 
 sudo cp oauth2/nginx-auth.conf /etc/nginx/nginx.conf
-sudo nginx -s reload
+sudo systemctl restart nginx
 nohup ./oauth2-proxy-v7.2.0.linux-amd64/oauth2-proxy --config=oauth2/oauth2-proxy.cfg >/dev/null 2>&1 &
+
