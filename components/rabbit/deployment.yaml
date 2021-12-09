@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: rabbit
-          image: rabbitmq:3
+          image: rabbitmq:3-management
           ports:
             - containerPort: 5672
               protocol: TCP
@@ -47,6 +47,51 @@ spec:
   selector:
     k8s-app: rabbit
 
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    k8s-app: rabbit
+  name: rabbit-management
+  namespace: rabbit
+spec:
+  ports:
+    - port: 15672
+      protocol: TCP
+      targetPort: 15672
+  selector:
+    k8s-app: rabbit
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: rabbit-management
+  namespace: rabbit
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`pipr.io`) && (PathPrefix(`/rabbit`)
+      kind: Rule
+      middlewares:
+      - name: rabbit-stripprefix
+      services:
+        - name: rabbit-management
+          port: 15672
+
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: rabbit-stripprefix
+spec:
+  stripPrefix:
+    prefixes:
+      - /rabbit
 ---
 
 apiVersion: v1

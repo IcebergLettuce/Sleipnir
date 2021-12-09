@@ -79,7 +79,7 @@ jobs:
     name: 'Install Nginx Reverse Proxy'
     runs-on: ubuntu-latest
     environment: production
-    needs: kubernetes
+    needs: traefik
 
     defaults:
       run:
@@ -133,11 +133,21 @@ jobs:
         target: "dashboard"
         strip_components: 2
 
+    - name: Install Dashboard
+      uses: appleboy/ssh-action@master
+      with:
+        host: pipr.io
+        username: ubuntu
+        key: ${{ secrets.SLEIPNIR_PK }}
+        script: |
+          sudo chmod +x dashboard/install.sh
+          sudo ./dashboard/install.sh
+
   traefik:
     name: 'Deploy Traefik Dashboard'
     runs-on: ubuntu-latest
     environment: production
-    needs: kubernetes
+    needs: dashboard
 
     defaults:
       run:
