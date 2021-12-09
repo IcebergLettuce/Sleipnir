@@ -79,7 +79,7 @@ jobs:
     name: 'Install Nginx Reverse Proxy'
     runs-on: ubuntu-latest
     environment: production
-    needs: kubernetes
+    needs: traefik
 
     defaults:
       run:
@@ -147,7 +147,7 @@ jobs:
     name: 'Deploy Traefik Dashboard'
     runs-on: ubuntu-latest
     environment: production
-    needs: kubernetes
+    needs: dashboard
 
     defaults:
       run:

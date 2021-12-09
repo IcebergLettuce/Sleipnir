@@ -74,7 +74,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`pipr.io`) && (PathPrefix(`/rabbit`)
+    - match: Host(`pipr.io`) && PathPrefix(`/rabbit`)
       kind: Rule
       middlewares:
       - name: rabbit-stripprefix
@@ -88,6 +88,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: rabbit-stripprefix
+  namespace: rabbit
 spec:
   stripPrefix:
     prefixes:
