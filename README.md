@@ -1,5 +1,4 @@
-## Notes
-
+## IaC to deploy a bare metal Kubernetes Cluster on a AWS EC2 instance
 
 
 
