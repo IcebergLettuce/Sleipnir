@@ -1,5 +1,13 @@
 ## Notes
 
+
+
+
+![Alt text](doc/pipeline.png?raw=true "Title")
+
+
+
+
 ### How To:
 
 Steps to bootstrap STEM
