@@ -1,56 +1,46 @@
-## IaC to deploy a bare metal Kubernetes Cluster on a AWS EC2 instance
+## About the Workbench project
+<br>
+This repository is what the name says - It is a workbench.
+<br>
+<br>
+
+**Recently when I was on vacation, I received an email from AWS. 
+Not again, a budget alert! <br> I forgot to deprovision the cloud environment I used to tinker around. Such an unfortunate surprise won't happen again.**
+
+This project offers three GitHub Action Pipelines to avoid this:
 
 
+- Simple Kubernetes Custer
+- Secure Kubernetes Cluster
+- Destroy Kubernetes Cluster
+
+*(even it says 'secure', these pipelines create an environment to tinker around. So far away from production! Don't even think about it. During the execution of the action, the system is very vulnerable)*
+<br>
+<br>
+What is going to happen:
+<br>
+<br>
+
+1. Terraform is used to provision an EC2 instance on AWS and bind an elastic IP address to it. Either the DNS records are already configured, or you have to do that manually at your domain registrar. Theoretically, one can also modify the terraform file to do that for you... But this can be a little bit annoying as it takes some time until they are available.
+
+2. Docker and Kubeadm are being installed. We use Kubeadm to create a single-node Kubernetes cluster. 
+
+
+3. Deployment of Traefik as an Ingress Controller. We expose two NodePorts, one for HTTP and one for HTTPS traffic.
+
+
+4. Deployment of ArgoCD and RabbitMQ.
+
+
+5. Deployment of Kubernetes and Traefik Dashboard.
+
+
+6. An NGINX Reverse Proxy is installed on the host machine and uses Let's Encrypt to acquire TLS certificates.
+
+
+7. In the "Secure" pipeline, we also add an OAuth2 proxy that hooks into the NGINX Reverse Proxy. 
+
+
+**Jipiii, after ~7 minutes, there is a fun environment ready to play.**
 
 ![Alt text](doc/pipeline.png?raw=true "Title")
-
-
-
-
-### How To:
-
-Steps to bootstrap STEM
-
-- Create a Key in AWS KMS  
-
-
-Resources: \
-https://www.youtube.com/watch?v=rYodcvhh7b8 \\
-https://github.com/meysamhadeli/awesome-dotnet-tips \\
-https://www.practicalnetworking.net/series/packet-traveling/packet-traveling/ \\
-https://traefik.io/resources/traefik-kubernetes-tutorial/
-______________________________
-### Part 1: 
-#### Automated provisionining of infrastructure and installation of Kubernetes
-
-Used Technologies:
-- Terraform & Bash
-
-Alternative Technologies:
-
-- Pulumi
-
-Open Questions:
-- Would be interesting to restrict the access to certain instances with AWS IAM control.
-- Is it possible to 'destroy' the provisioned system if the cos reached a certain level.
-
-Notes:
-- It is important to create an AWS with restricted access to avoid any privilege escalation scenarios.
-- The 'remote-exec' block of the terraform file is execute prior binding the elastic IP adress. This is requires that we set up networking related components in a separated step
-
-
-https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwjYofK2hOvzAhVz9OAKHVnlBP04ChAWegQIBBAB&url=http%3A%2F%2Fevents19.linuxfoundation.org%2Fwp-content%2Fuploads%2F2017%2F12%2FHashicorp-Terraform-Deep-Dive-with-no-Fear-Victor-Turbinsky-Texuna.pdf&usg=AOvVaw3lxkN2rXjK8UI8apfYJNC-
-
-Common mistakes: https://blog.pipetail.io/posts/2020-10-29-most-common-mistakes-terraform/
-______________________________
-### Part 2: 
-#### Make Kubernetes accessible to the outside world
-
-
-Open Questions:
-- TBD
-- TBD
-
-Notes:
-- TBD
-- TBD
