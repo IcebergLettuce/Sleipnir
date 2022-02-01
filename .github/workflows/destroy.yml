@@ -34,16 +34,16 @@ jobs:
     - name: Terraform Init
       run: terraform -chdir=components/empty init 
       env:
-        TF_VAR_SLEIPNIR: ${{ secrets.SLEIPNIR_PK }}
+        TF_VAR_SLEIPNIR: ${{ secrets.WORKBENCH_PK }}
 
     - name: Terraform Plan
       run: terraform -chdir=components/empty plan
       env:
-        TF_VAR_SLEIPNIR: ${{ secrets.SLEIPNIR_PK }}
+        TF_VAR_SLEIPNIR: ${{ secrets.WORKBENCH_PK }}
 
     - name: Terraform Apply
       run: terraform -chdir=components/empty apply -auto-approve -lock=false 
       env:
-        TF_VAR_SLEIPNIR: ${{ secrets.SLEIPNIR_PK }}
+        TF_VAR_SLEIPNIR: ${{ secrets.WORKBENCH_PK }}
 
    
