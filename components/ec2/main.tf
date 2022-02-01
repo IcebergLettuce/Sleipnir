@@ -81,7 +81,7 @@ resource "aws_eip_association" "eip_assoc" {
 }
 
 resource "aws_instance" "sleipnir" {
-  key_name      = "sleipnir"
+  key_name      = "workbench"
   ami           = "ami-05f7491af5eef733a"
   instance_type = "t2.medium"
 
