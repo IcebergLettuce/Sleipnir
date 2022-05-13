@@ -10,15 +10,15 @@ terraform {
  }
 
  backend "s3" {
-   bucket         = "sleipnir-infrastructure-state"
+   bucket         = "workbench-infrastructure-state"
    key            = "state/terraform.tfstate"
    region         = "eu-central-1"
    encrypt        = true
-   dynamodb_table = "sleipnir-infrastructure-state"
+   dynamodb_table = "workbench-infrastructure-state"
  }
 }
 
-variable "SLEIPNIR" {
+variable "workbench" {
   type = string
 }
 
@@ -27,8 +27,8 @@ provider "aws" {
   region  = "eu-central-1"
 }
 
-resource "aws_security_group" "sleipnir" {
-  name        = "sleipnir-security-group"
+resource "aws_security_group" "workbench" {
+  name        = "workbench-security-group"
   description = "Allow HTTP, HTTPS and SSH traffic"
 
   ingress {
@@ -63,6 +63,6 @@ resource "aws_security_group" "sleipnir" {
   }
 
   tags = {
-    Name = "sleipnir"
+    Name = "workbench"
   }
 }

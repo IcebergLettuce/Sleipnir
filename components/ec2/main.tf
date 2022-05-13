@@ -10,15 +10,15 @@ terraform {
  }
 
  backend "s3" {
-   bucket         = "sleipnir-infrastructure-state"
+   bucket         = "workbench-infrastructure-state"
    key            = "state/terraform.tfstate"
    region         = "eu-central-1"
    encrypt        = true
-   dynamodb_table = "sleipnir-infrastructure-state"
+   dynamodb_table = "workbench-infrastructure-state"
  }
 }
 
-variable "SLEIPNIR" {
+variable "workbench" {
   type = string
 }
 
@@ -27,8 +27,8 @@ provider "aws" {
   region  = "eu-central-1"
 }
 
-resource "aws_security_group" "sleipnir" {
-  name        = "sleipnir-security-group"
+resource "aws_security_group" "workbench" {
+  name        = "workbench-security-group"
   description = "Allow HTTP, HTTPS, AMQP and SSH traffic"
 
   ingress {
@@ -71,26 +71,26 @@ resource "aws_security_group" "sleipnir" {
   }
 
   tags = {
-    Name = "sleipnir"
+    Name = "workbench"
   }
 }
 
 resource "aws_eip_association" "eip_assoc" {
-  instance_id   = "${aws_instance.sleipnir.id}"
+  instance_id   = "${aws_instance.workbench.id}"
   allocation_id = "eipalloc-78a96a79"
 }
 
-resource "aws_instance" "sleipnir" {
+resource "aws_instance" "workbench" {
   key_name      = "workbench"
   ami           = "ami-05f7491af5eef733a"
   instance_type = "t2.medium"
 
   tags = {
-    Name = "sleipnir"
+    Name = "workbench"
   }
 
   vpc_security_group_ids = [
-    aws_security_group.sleipnir.id
+    aws_security_group.workbench.id
   ]
 
   ebs_block_device {
