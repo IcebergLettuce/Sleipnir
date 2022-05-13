@@ -18,10 +18,6 @@ terraform {
  }
 }
 
-variable "workbench" {
-  type = string
-}
-
 provider "aws" {
   profile = "default"
   region  = "eu-central-1"
