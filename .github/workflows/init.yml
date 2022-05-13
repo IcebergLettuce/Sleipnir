@@ -1,4 +1,4 @@
-name: 'Initialize S3 bucket for Terraform'
+name: 'Terraform S3 Bucket'
 
 on:
   workflow_dispatch:
