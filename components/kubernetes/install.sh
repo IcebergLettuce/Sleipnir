@@ -88,7 +88,8 @@ kubeadm init --pod-network-cidr=10.244.0.0/16
 mkdir -p $HOME/.kube
 cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 chown $(id -u):$(id -g) $HOME/.kube/config
-kubectl taint nodes --all node-role.kubernetes.io/master-
+
+kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 kubectl apply -f https://github.com/coreos/flannel/raw/master/Documentation/kube-flannel.yml
 
 
@@ -104,3 +105,13 @@ echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt
 apt-get update
 apt-get install helm
 
+
+# ___________________________
+#
+# DOWNLOAD AND INSTALL TRAEFIK INGRESS CONTROLLER
+#
+# ___________________________
+
+helm repo add traefik https://helm.traefik.io/traefik
+helm repo update
+helm install traefik traefik/traefik
