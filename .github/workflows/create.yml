@@ -75,8 +75,8 @@ jobs:
         username: ubuntu
         key: ${{ secrets.WORKBENCH_PK }}
         script: |
-          chmod +x kubernetes/install.sh
-          ./kubernetes/install.sh
+          sudo chmod +x kubernetes/install.sh
+          sudo ./kubernetes/install.sh
 
   nginx:
     name: 'Install Nginx Reverse Proxy'
@@ -109,8 +109,8 @@ jobs:
         username: ubuntu
         key: ${{ secrets.WORKBENCH_PK }}
         script: |
-          chmod +x nginx/install.sh
-          ./nginx/install.sh
+          sudo chmod +x nginx/install.sh
+          sudo ./nginx/install.sh
 
   dashboard:
     name: 'Deploy Kubernetes Dashboard'
@@ -143,8 +143,8 @@ jobs:
         username: ubuntu
         key: ${{ secrets.WORKBENCH_PK }}
         script: |
-          chmod +x dashboard/install.sh
-          ./dashboard/install.sh
+          sudo chmod +x dashboard/install.sh
+          sudo ./dashboard/install.sh
 
   traefik:
     name: 'Deploy Traefik Dashboard'
@@ -177,8 +177,8 @@ jobs:
         username: ubuntu
         key: ${{ secrets.WORKBENCH_PK }}
         script: |
-          chmod +x traefik/install.sh
-          ./traefik/install.sh
+          sudo chmod +x traefik/install.sh
+          sudo ./traefik/install.sh
           
   rabbit:
     name: 'Deploy Rabbit MQ'
@@ -211,8 +211,8 @@ jobs:
         username: ubuntu
         key: ${{ secrets.WORKBENCH_PK }}
         script: |
-          chmod +x rabbit/install.sh
-          ./rabbit/install.sh
+          sudo chmod +x rabbit/install.sh
+          sudo ./rabbit/install.sh
       
   argocd:
     name: 'Deploy Argocd'
@@ -245,5 +245,5 @@ jobs:
         username: ubuntu
         key: ${{ secrets.WORKBENCH_PK }}
         script: |
-          chmod +x argocd/install.sh
-          ./argocd/install.sh
+          sudo chmod +x argocd/install.sh
+          sudo ./argocd/install.sh
