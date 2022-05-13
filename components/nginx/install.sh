@@ -1,15 +1,14 @@
 
 # Reverse Proxy
-sudo apt update
-sudo apt install nginx -y
-
-sudo apt-get install certbot -y
-sudo apt-get install python3-certbot-nginx -y
+apt update
+apt install ngin
+apt-get install certbot -y
+apt-get install python3-certbot-nginx -y
 
 HTTP_PORT=$(sudo kubectl get -o jsonpath="{.spec.ports[0].nodePort}" services traefik)
 HTTPS_PORT=$(sudo kubectl get -o jsonpath="{.spec.ports[1].nodePort}" services traefik)
 
-sudo systemctl start nginx
+systemctl start nginx
 
 cat <<EOF >> stem.conf
 load_module /usr/lib/nginx/modules/ngx_stream_module.so;
@@ -43,8 +42,8 @@ stream {
 }
 EOF
 
-sudo mv stem.conf /etc/nginx/nginx.conf
-sudo systemctl reload nginx
+mv stem.conf /etc/nginx/nginx.conf
+systemctl reload nginx
 
 # sudo certbot --nginx -d pipr.io -d www.pipr.io -d argocd.pipr.io -d www.argocd.pipr.io -d dashboard.pipr.io -d www.dashboard.pipr.io --non-interactive --agree-tos -m manuel.alexander.hirzel@gmail.com
 # sudo systemctl reload nginx
