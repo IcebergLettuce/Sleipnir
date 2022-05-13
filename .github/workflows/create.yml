@@ -61,7 +61,7 @@ jobs:
     - name: Upload Kubernetes Component
       uses: appleboy/scp-action@master
       with:
-        host: $DOMAINNAME
+        host: ${{ env.DOMAINNAME }}
         username: ubuntu
         key: ${{ secrets.WORKBENCH_PK }}
         source: "components/kubernetes/install.sh,components/kubernetes/basic-deployment.yaml "
@@ -71,7 +71,7 @@ jobs:
     - name: Install Kubernetes
       uses: appleboy/ssh-action@master
       with:
-        host: $DOMAINNAME
+        host: ${{ env.DOMAINNAME }}
         username: ubuntu
         key: ${{ secrets.WORKBENCH_PK }}
         script: |
@@ -95,7 +95,7 @@ jobs:
     - name: Upload Nginx Component
       uses: appleboy/scp-action@master
       with:
-        host: $DOMAINNAME
+        host: ${{ env.DOMAINNAME }}
         username: ubuntu
         key: ${{ secrets.WORKBENCH_PK }}
         source: "components/nginx/install.sh"
@@ -105,7 +105,7 @@ jobs:
     - name: Install Nginx
       uses: appleboy/ssh-action@master
       with:
-        host: $DOMAINNAME
+        host: ${{ env.DOMAINNAME }}
         username: ubuntu
         key: ${{ secrets.WORKBENCH_PK }}
         script: |
@@ -129,7 +129,7 @@ jobs:
     - name: Upload Dashboard Component
       uses: appleboy/scp-action@master
       with:
-        host: $DOMAINNAME
+        host: ${{ env.DOMAINNAME }}
         username: ubuntu
         key: ${{ secrets.WORKBENCH_PK }}
         source: "components/dashboard/install.sh,components/dashboard/deployment.yaml"
@@ -139,7 +139,7 @@ jobs:
     - name: Install Dashboard
       uses: appleboy/ssh-action@master
       with:
-        host: $DOMAINNAME
+        host: ${{ env.DOMAINNAME }}
         username: ubuntu
         key: ${{ secrets.WORKBENCH_PK }}
         script: |
@@ -163,7 +163,7 @@ jobs:
     - name: Upload Traefik Component
       uses: appleboy/scp-action@master
       with:
-        host: $DOMAINNAME
+        host: ${{ env.DOMAINNAME }}
         username: ubuntu
         key: ${{ secrets.WORKBENCH_PK }}
         source: "components/traefik/install.sh,components/traefik/deployment.yaml"
@@ -173,7 +173,7 @@ jobs:
     - name: Install Traefik Dashboard
       uses: appleboy/ssh-action@master
       with:
-        host: $DOMAINNAME
+        host: ${{ env.DOMAINNAME }}
         username: ubuntu
         key: ${{ secrets.WORKBENCH_PK }}
         script: |
@@ -197,7 +197,7 @@ jobs:
     - name: Upload Rabbit Component
       uses: appleboy/scp-action@master
       with:
-        host: $DOMAINNAME
+        host: ${{ env.DOMAINNAME }}
         username: ubuntu
         key: ${{ secrets.WORKBENCH_PK }}
         source: "components/rabbit/install.sh,components/rabbit/deployment.yaml"
@@ -207,7 +207,7 @@ jobs:
     - name: Install Rabbit
       uses: appleboy/ssh-action@master
       with:
-        host: $DOMAINNAME
+        host: ${{ env.DOMAINNAME }}
         username: ubuntu
         key: ${{ secrets.WORKBENCH_PK }}
         script: |
@@ -231,7 +231,7 @@ jobs:
     - name: Upload Argocd Component
       uses: appleboy/scp-action@master
       with:
-        host: $DOMAINNAME
+        host: ${{ env.DOMAINNAME }}
         username: ubuntu
         key: ${{ secrets.WORKBENCH_PK }}
         source: "components/argocd/install.sh,components/argocd/argocd-patch.yaml,components/argocd/argocd-ingress.yaml"
@@ -241,7 +241,7 @@ jobs:
     - name: Install Argod
       uses: appleboy/ssh-action@master
       with:
-        host: $DOMAINNAME
+        host: ${{ env.DOMAINNAME }}
         username: ubuntu
         key: ${{ secrets.WORKBENCH_PK }}
         script: |
