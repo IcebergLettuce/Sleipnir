@@ -44,6 +44,6 @@ EOF
 
 mv stem.conf /etc/nginx/nginx.conf
 systemctl reload nginx
-
-# sudo certbot --nginx -d pipr.io -d www.pipr.io -d argocd.pipr.io -d www.argocd.pipr.io -d dashboard.pipr.io -d www.dashboard.pipr.io --non-interactive --agree-tos -m manuel.alexander.hirzel@gmail.com
-# sudo systemctl reload nginx
+  
+certbot --nginx -d pipr.io -d www.pipr.io -d argocd.pipr.io -d www.argocd.pipr.io -d dashboard.pipr.io -d www.dashboard.pipr.io --non-interactive --agree-tos -m manuel.alexander.hirzel@gmail.com
+systemctl reload nginx
